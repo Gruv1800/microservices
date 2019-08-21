@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+                            http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog-ext/dbchangelog-ext.xsd">
+    <changeSet id="0001" author="vgruzdev">
+        <preConditions>
+            <not>
+                <tableExists tableName="oauth_client_details"/>
+            </not>
+        </preConditions>
+        <createTable tableName="oauth_client_details">
+            <column name="client_id" type="varchar(256)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="resources_id" type="varchar(256)"/>
+            <column name="client_secret" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="scope" type="varchar(256)"/>
+            <column name="authorized_grant_types" type="varchar(256)"/>
+            <column name="web_server_redirect_url" type="varchar(256)"/>
+            <column name="authorities" type="varchar(256)"/>
+            <column name="access_token_validity" type="int"/>
+            <column name="refresh_token_validity" type="int"/>
+            <column name="additional_info" type="varchar(3000)"/>
+            <column name="auto_approve" type="varchar(256)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="0002" author="vgruzdev">
+        <preConditions>
+            <not>
+                <tableExists tableName="oauth_client_token"/>
+            </not>
+        </preConditions>
+        <createTable tableName="oauth_client_token">
+            <column name="token_id" type="varchar(256)"/>
+            <column name="token" type="BLOB"/>
+            <column name="authentication_id" type="varchar(256)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_name" type="varchar(256)"/>
+            <column name="client_id" type="varchar(256)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="0003" author="vgruzdev">
+        <preConditions>
+            <not>
+                <tableExists tableName="oauth_access_token"/>
+            </not>
+        </preConditions>
+        <createTable tableName="oauth_access_token">
+            <column name="token_id" type="varchar(256)"/>
+            <column name="token" type="BLOB"/>
+            <column name="authentication_id" type="varchar(256)"/>
+            <column name="user_name" type="varchar(256)"/>
+            <column name="client_id" type="varchar(256)"/>
+            <column name="authentication" type="BLOB"/>
+            <column name="refresh_token" type="varchar(256)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="0004" author="vgruzdev">
+        <preConditions>
+            <not>
+                <tableExists tableName="oauth_refresh_token"/>
+            </not>
+        </preConditions>
+        <createTable tableName="oauth_refresh_token">
+            <column name="token_id" type="varchar(256)"/>
+            <column name="token" type="BLOB"/>
+            <column name="authentication" type="BLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="0005" author="vgruzdev">
+        <preConditions>
+            <not>
+                <tableExists tableName="oauth_code"/>
+            </not>
+        </preConditions>
+        <createTable tableName="oauth_code">
+            <column name="code" type="varchar(256)"/>
+            <column name="authentication" type="BLOB"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="0006" author="vgruzdev">
+        <preConditions>
+            <not>
+                <tableExists tableName="users"/>
+            </not>
+        </preConditions>
+        <createTable tableName="users">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+            <column name="username" type="varchar(256)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="password" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="enabled" type="boolean"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="0007" author="vgruzdev">
+        <preConditions>
+            <not>
+                <tableExists tableName="authorities"/>
+            </not>
+        </preConditions>
+        <createTable tableName="authorities">
+            <column name="username">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="authority">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
