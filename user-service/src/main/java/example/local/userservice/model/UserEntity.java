@@ -14,7 +14,6 @@ import javax.validation.constraints.NotNull;
 @Data
 @Entity
 @NoArgsConstructor
-@RequiredArgsConstructor
 public class UserEntity {
     @Id
     @GeneratedValue

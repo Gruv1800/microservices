@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+                            http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog-ext/dbchangelog-ext.xsd">
+    <changeSet id="0001" author="vgruzdev">
+        <insert tableName="oauth_client_details">
+            <column name="client_id" value="test_user"/>
+            <!--            password - 123-->
+            <column name="client_secret" value="{bcript}$2y$12$iJZz57HL.T02hTb/sNoVoudMWeZHwr0WX0xhvFcXQnI565Yx2jvBy"/>
+            <column name="scope" value="read,write"/>
+            <column name="authorized_grant_types" value="password,refresh_token, client_credentials"/>
+            <column name="authorities" value="ROLE_CLIENT"/>
+            <column name="access_token_validity" value="3000"/>
+        </insert>
+    </changeSet>
+    <changeSet id="0002" author="vgruzdev">
+        <insert tableName="users">
+            <column name="username" value="test_user"/>
+            <column name="password" value="{bcript}$2y$12$iJZz57HL.T02hTb/sNoVoudMWeZHwr0WX0xhvFcXQnI565Yx2jvBy"/>
+            <column name="enabled" value="true"/>
+        </insert>
+    </changeSet>
+    <changeSet id="0003" author="vgruzdev">
+        <insert tableName="authorities">
+            <column name="username" value="test_user"/>
+            <column name="authorities" value="ROLE_USER"
+        </insert>
+    </changeSet>
+</databaseChangeLog>

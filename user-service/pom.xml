@@ -5,7 +5,7 @@
     <parent>
         <artifactId>parent-msa</artifactId>
         <groupId>local.example</groupId>
-        <version>${custom.parent.version}</version>
+        <version>0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
